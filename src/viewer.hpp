@@ -83,12 +83,6 @@ public:
     [[nodiscard]] ImagePtr current_image() const { return image; }
 
     /**
-     * Switch to specified frame.
-     * @param index frame index to activate.
-     */
-    void set_frame(const size_t index);
-
-    /**
      * Get currently displayed frame index.
      * @return frame index
      */
@@ -157,12 +151,6 @@ public:
      * @param angle rotation angle (only 90, 180, or 270)
      */
     void rotate(const size_t angle);
-
-    /**
-     * Stop/resume animation.
-     * @param enable state to set
-     */
-    void enable_animation(const bool enable);
 
     /**
      * Get current animation status.
@@ -247,6 +235,18 @@ private:
      * @param img image instance to set as current
      */
     void set_image(const ImagePtr& img);
+
+    /**
+     * Switch to specified frame.
+     * @param index frame index to activate.
+     */
+    void set_frame(const size_t index);
+
+    /**
+     * Start or stop animation playback.
+     * @param enable state to set
+     */
+    void enable_animation(const bool enable);
 
     /** Type of text update. */
     enum class TextUpdate : uint8_t {

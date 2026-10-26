@@ -82,7 +82,7 @@ or in the file `/usr/share/swayimg/example.lua` after installing the program.
   * [swayimg.viewer.default_scale](#swayimgviewerdefault_scale): |fixed_scale_t
   * [swayimg.viewer.default_position](#swayimgviewerdefault_position): Default image position for newly opened images
   * [swayimg.viewer.scale](#swayimgviewerscale): Absolute scale value (1.0 = 100%)
-  * [swayimg.viewer.animation](#swayimgvieweranimation): Stop/resume and get animation status
+  * [swayimg.viewer.animation](#swayimgvieweranimation): Get animation status
   * [swayimg.viewer.frame](#swayimgviewerframe): Currently displayed frame number
   * [swayimg.viewer.drag_button](#swayimgviewerdrag_button): Mouse button used for drag image around the window
   * [swayimg.viewer.focus_radius](#swayimgviewerfocus_radius): Focus area radius in pixels (0 to disable focus mode)
@@ -126,7 +126,7 @@ or in the file `/usr/share/swayimg/example.lua` after installing the program.
   * [swayimg.slideshow.default_scale](#swayimgslideshowdefault_scale): |fixed_scale_t
   * [swayimg.slideshow.default_position](#swayimgslideshowdefault_position): Default image position for newly opened images
   * [swayimg.slideshow.scale](#swayimgslideshowscale): Absolute scale value (1.0 = 100%)
-  * [swayimg.slideshow.animation](#swayimgslideshowanimation): Stop/resume and get animation status
+  * [swayimg.slideshow.animation](#swayimgslideshowanimation): Get animation status
   * [swayimg.slideshow.frame](#swayimgslideshowframe): Currently displayed frame number
   * [swayimg.slideshow.drag_button](#swayimgslideshowdrag_button): Mouse button used for drag image around the window
   * [swayimg.slideshow.focus_radius](#swayimgslideshowfocus_radius): Focus area radius in pixels (0 to disable focus mode)
@@ -334,13 +334,6 @@ Supported parameters:
   * `text`: Text to render
   * `color`: Text color
   * `background`: Background color
-* `video`:
-  * `enable`: Enable decoder
-  * `size`: Size (width) of a single tile (frame)
-  * `columns`: Number of columns in storyboard
-  * `rows`: Number of rows in storyboard
-  * `padding`: Gap between frames in pixels
-  * `label`: Label color in gallery mode
 
 ### swayimg.title
 
@@ -810,7 +803,7 @@ Since 5.5.
 swayimg.viewer.animation: boolean
 ```
 
-Stop/resume and get animation status.
+Get animation status.
 
 Since 5.5.
 
@@ -823,8 +816,6 @@ swayimg.viewer.frame: integer
 Currently displayed frame number.
 
 Since 5.5.
-
-Setting this field stops animation.
 
 ### swayimg.viewer.drag_button
 
@@ -1473,7 +1464,7 @@ Since 5.5.
 swayimg.slideshow.animation: boolean
 ```
 
-Stop/resume and get animation status.
+Get animation status.
 
 Since 5.5.
 
@@ -1486,8 +1477,6 @@ swayimg.slideshow.frame: integer
 Currently displayed frame number.
 
 Since 5.5.
-
-Setting this field stops animation.
 
 ### swayimg.slideshow.drag_button
 

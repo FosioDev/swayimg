@@ -1278,79 +1278,11 @@ void LuaEngine::bind_viewer_api(const char* name)
             [ensure_active, mode] {
                 ensure_active("animation");
                 return mode->animation_enabled();
-            },
-            [ensure_active, mode](const bool value) {
-                ensure_active("next_frame");
-                mode->enable_animation(value);
-            })
-        .addFunction(
-            "set_animation",
-            [ensure_active, name, mode](const std::optional<bool>& enable) {
-                warn_deprecated(
-                    std::format("swayimg.{}.set_animation()", name).c_str(),
-                    std::format("swayimg.{}.animation field", name).c_str());
-                ensure_active("set_animation");
-                mode->enable_animation(
-                    enable.value_or(!mode->animation_enabled()));
-            })
-        .addFunction(
-            "get_animation",
-            [ensure_active, name, mode] {
-                warn_deprecated(
-                    std::format("swayimg.{}.get_animation()", name).c_str(),
-                    std::format("swayimg.{}.animation field", name).c_str());
-                ensure_active("get_animation");
-                return mode->animation_enabled();
-            })
-        .addFunction(
-            "animation_stop",
-            [ensure_active, name, mode] {
-                warn_deprecated(
-                    std::format("swayimg.{}.animation_stop()", name).c_str(),
-                    std::format("swayimg.{}.animation field", name).c_str());
-                ensure_active("animation_stop");
-                mode->enable_animation(false);
-            })
-        .addFunction(
-            "animation_resume",
-            [ensure_active, name, mode] {
-                warn_deprecated(
-                    std::format("swayimg.{}.animation_resume()", name).c_str(),
-                    std::format("swayimg.{}.animation field", name).c_str());
-                ensure_active("animation_resume");
-                mode->enable_animation(true);
             })
         .addProperty(
             "frame",
             [ensure_active, mode] {
                 ensure_active("frame");
-                return mode->get_frame();
-            },
-            [ensure_active, mode](const size_t value) {
-                ensure_active("frame");
-                mode->enable_animation(false);
-                mode->set_frame(value);
-            })
-        .addFunction(
-            "next_frame",
-            [ensure_active, name, mode] {
-                warn_deprecated(
-                    std::format("swayimg.{}.next_frame()", name).c_str(),
-                    std::format("swayimg.{}.frame field", name).c_str());
-                ensure_active("next_frame");
-                mode->enable_animation(false);
-                mode->set_frame(mode->get_frame() + 1);
-                return mode->get_frame();
-            })
-        .addFunction(
-            "prev_frame",
-            [ensure_active, name, mode] {
-                warn_deprecated(
-                    std::format("swayimg.{}.prev_frame()", name).c_str(),
-                    std::format("swayimg.{}.frame field", name).c_str());
-                ensure_active("prev_frame");
-                mode->enable_animation(false);
-                mode->set_frame(mode->get_frame() - 1);
                 return mode->get_frame();
             })
         .addProperty(

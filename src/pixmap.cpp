@@ -64,6 +64,7 @@ void Pixmap::free()
     pm_stride = 0;
     pm_ext = nullptr;
     pm_data.clear();
+    pm_data.shrink_to_fit();
 }
 
 Pixmap Pixmap::submap(const Rectangle& rect)

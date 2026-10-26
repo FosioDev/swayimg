@@ -4,7 +4,6 @@ RUN pacman --sync --sysupgrade --refresh --refresh --noconfirm \
     bash-completion \
     clang \
     exiv2 \
-    ffmpeg \
     fontconfig \
     gcovr \
     gtest \

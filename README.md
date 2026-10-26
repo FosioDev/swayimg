@@ -1,3 +1,54 @@
+## ⚠️ AI-Generated Code
+
+This fork was developed entirely through an AI coding agent (pi coding agent, model `laguna-s-2.1`). The code has not been read by a human. Use at your own risk.
+
+## What This Fork Does Differently
+
+This fork includes optimizations and changes that differentiate it from the upstream swayimg:
+
+### Memory Optimizations (Animated Images)
+
+- **Animated AVIF streaming**: Instead of decoding all frames into memory at once (DecodeAll), frames are decoded on demand via `avifDecoderNextImage`. Only one active frame is kept in RAM at a time; previous frames are freed as new ones are decoded.
+- **Animated WebP streaming**: Same approach for WebP using `WebPAnimDecoderGetNext`. The decoder is kept alive for on-demand frame decoding, with old frames freed from RAM.
+- **Animated GIF streaming**: GIF frames are decoded on demand via the low-level gif_lib API (`DGifGetLine`), avoiding `DGifSlurp` which decompresses all frames into `SavedImages[].RasterBits` at once. A compositing canvas maintains the state between frames for correct disposal mode handling.
+
+For example, viewing large animated files (339 AVIF + 171 WebP frames at 1320×1090):
+- **Upstream swayimg**: ~3.7 GB RAM (all frames decoded and stored simultaneously)
+- **This fork**: ~150 MB RAM (one active frame per image + decoder state)
+
+### Removed Functionality
+
+- **Video support removed**: The fork no longer supports video files. This includes removal of video-related code, settings, tests, and Lua config entries.
+- **Animation control removed**: Frame-by-frame seeking and play/pause controls for animated images have been removed. Only automatic playback remains for animated images.
+
+### Gallery Mode
+
+- **Gallery::Aspect::Keep** is now the default aspect ratio for thumbnails, replacing `Gallery::Aspect::Fill`. Thumbnails preserve the original image aspect ratio instead of being cropped to squares.
+
+## Installation on NixOS
+
+1. Add the following to your system `flake.nix` inputs:
+```nix
+swayimg = {
+  url = "github:fosiodev/swayimg";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
+```
+2. Add `swayimg` to your `environment.systemPackages`:
+```nix
+environment.systemPackages = [
+  inputs.swayimg.packages.${pkgs.stdenv.hostPlatform.system}.default
+];
+```
+
+## Build on NixOS
+
+```sh
+nix develop
+meson setup build -Dvideo=disabled && ninja -C build
+./build/swayimg image1.png image2.avif
+```
+
 # Swayimg: image viewer for Wayland and DRM
 
 Swayimg is a fully customizable image viewer with [Lua scripting](CONFIG.md) support.
@@ -25,8 +76,7 @@ Swayimg is a fully customizable image viewer with [Lua scripting](CONFIG.md) sup
   - DICOM (built-in);
   - Farbfeld (built-in).
 - Support for non-image previews:
-  - Font: TTF/OTF/WOFF (via [FreeType](https://freetype.org));
-  - Video: preview in storyboard (via [FFMpeg](https://ffmpeg.org)).
+  - Font: TTF/OTF/WOFF (via [FreeType](https://freetype.org)).
 - Native support for Wayland and DRM output;
 - Gallery and viewer modes with slideshow;
 - Image animation support;

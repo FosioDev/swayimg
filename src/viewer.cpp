@@ -712,6 +712,7 @@ void Viewer::set_frame(const size_t index)
     assert(is_active());
 
     if (image && index < image->frames.size()) {
+        image->switch_frame(index);
         frame_index = index;
         update_text(TextUpdate::Frame);
         Application::redraw();

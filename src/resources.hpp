@@ -17,7 +17,4 @@ extern const Pixmap file;
 /** Empty image icon (alpha channel mask). */
 extern const Pixmap empty;
 
-/** Video label (alpha channel mask). */
-extern const Pixmap video;
-
 }; // namespace Resource

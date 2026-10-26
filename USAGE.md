@@ -81,8 +81,6 @@ stdin and external commands, and is highly customizable via Lua scripting.
 - `t`: Show/hide text info layer
 - `PgDown`: Show next image
 - `PgUp`: Show previous image
-- `Shift-PgDown`: Show next frame
-- `Shift-PgUp`: Show previous frame
 - `+`: Zoom in
 - `-`: Zoom out
 - `Left/Right/Up/Down`: Move around the image

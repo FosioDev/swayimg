@@ -124,7 +124,7 @@ namespace slideshow {
 
 // gallery
 namespace gallery {
-    constexpr Gallery::Aspect aspect = Gallery::Aspect::Fill;
+    constexpr Gallery::Aspect aspect = Gallery::Aspect::Keep;
     constexpr size_t border_size = 5;
     constexpr double selected_scale = 1.15;
     constexpr size_t thumb_size = 200;

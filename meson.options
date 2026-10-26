@@ -83,12 +83,6 @@ option(
     value: 'auto',
     description: 'Enable WebP format support',
 )
-option(
-    'video',
-    type: 'feature',
-    value: 'auto',
-    description: 'Enable video storyboard support',
-)
 
 # EXIF support
 option(

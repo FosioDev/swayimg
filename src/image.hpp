@@ -74,6 +74,21 @@ public:
      */
     virtual void rotate(const size_t angle);
 
+    /**
+     * Switch to a different frame.
+     *
+     * Called when the viewer advances to a different animation frame.
+     * Format handlers that use frame streaming should decode the requested
+     * frame here and free the previous one.
+     *
+     * The base implementation does nothing (frames are pre-decoded).
+     * @param index frame index to switch to
+     */
+    virtual void switch_frame(const size_t index)
+    {
+        (void)index;
+    }
+
 public:
     /** Image frame. */
     struct Frame {

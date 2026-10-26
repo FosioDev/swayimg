@@ -171,13 +171,6 @@
 ---  * `text`: Text to render
 ---  * `color`: Text color
 ---  * `background`: Background color
----* `video`:
----  * `enable`: Enable decoder
----  * `size`: Size (width) of a single tile (frame)
----  * `columns`: Number of columns in storyboard
----  * `rows`: Number of rows in storyboard
----  * `padding`: Gap between frames in pixels
----  * `label`: Label color in gallery mode
 ---@field format_conf table
 ---
 ---Window title.
@@ -470,13 +463,12 @@ function swayimg_appmode.on_image_change(fn) end
 ---Since 5.5.
 ---@field scale number
 ---
----Stop/resume and get animation status.
+---Get animation status.
 ---Since 5.5.
 ---@field animation boolean
 ---
 ---Currently displayed frame number.
 ---Since 5.5.
----Setting this field stops animation.
 ---@field frame integer
 ---
 ---Mouse button used for drag image around the window.

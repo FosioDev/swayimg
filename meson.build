@@ -100,11 +100,7 @@ jp2 = dependency('libopenjp2', required: get_option('jp2'))
 jxl = dependency('libjxl', required: get_option('jxl'))
 jxl_threads = dependency('libjxl_threads', required: get_option('jxl'))
 zip = dependency('minizip-ng', required: get_option('krita'))
-if get_option('krita').enabled() or get_option('png').enabled()
-  png = dependency('libpng', required: true)
-else
-  png = dependency('libpng', required: get_option('png'))
-endif
+png = dependency('libpng', required: get_option('png').enabled() or get_option('krita').enabled())
 rsvg = dependency('librsvg-2.0', version: '>=2.46', required: get_option('svg'))
 tiff = dependency('libtiff-4', required: get_option('tiff'))
 sixel = dependency('libsixel', required: get_option('sixel'))
@@ -127,19 +123,6 @@ if webp_base.found() and webp_demux.found()
 else
     webp = dependency('', required: false)
 endif
-# Video storyboard
-avformat = dependency('libavformat', version: '>=60.16.100', required: get_option('video'))
-avcodec = dependency('libavcodec', version: '>=60.31.102', required: get_option('video'))
-avutil = dependency('libavutil', version: '>=58.29.100', required: get_option('video'))
-swscale = dependency('libswscale', version: '>=7.5.100', required: get_option('video'))
-if avformat.found() and avcodec.found() and avutil.found() and swscale.found()
-    video = declare_dependency(
-        dependencies: [avformat, avcodec, avutil, swscale],
-    )
-else
-    video = dependency('', required: false)
-endif
-
 # hack to build "pkgconfigless" gif in FreeBSD
 cc = meson.get_compiler('c')
 gif_opt = get_option('gif')
@@ -185,7 +168,6 @@ conf.set('HAVE_LIBSIXEL', sixel.found())
 conf.set('HAVE_LIBRAW', raw.found())
 conf.set('HAVE_LIBWEBP', webp.found())
 conf.set('HAVE_KRITA', krita.found())
-conf.set('HAVE_VIDEO', video.found())
 conf.set_quoted('APP_VERSION', version)
 configure_file(output: 'buildconf.hpp', configuration: conf)
 
@@ -399,9 +381,6 @@ endif
 if webp.found()
     sources += 'src/formats/webp.cpp'
 endif
-if video.found()
-    sources += 'src/formats/video.cpp'
-endif
 
 dependencies = [
     # runtime
@@ -431,7 +410,6 @@ dependencies = [
     sixel,
     tiff,
     webp,
-    video,
 ]
 
 executable(

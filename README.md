@@ -42,10 +42,9 @@ environment.systemPackages = [
 ```
 
 ## Build on NixOS
-
 ```sh
 nix develop
-meson setup build -Dvideo=disabled && ninja -C build
+meson setup build && ninja -C build
 ./build/swayimg image1.png image2.avif
 ```
 
